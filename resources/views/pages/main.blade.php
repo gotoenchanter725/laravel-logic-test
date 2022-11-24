@@ -13,20 +13,20 @@
                 <button id="copyBtn"
                     class="h-full text-white bg-primary hover:bg-secondary border-l border-gray-200 text-sm font-medium px-5 py-2">Copy</button>
             </div>
-            <button
+            <button id="recreate"
                 class="m-1 text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">Recreate
                 Access Link</button>
-            <button
+            <button id="deactivate"
                 class="m-1 text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">Deactivte
                 Access Link</button>
         </div>
         <div class="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg w-full">
-            <button
+            <button id="feelLucky"
                 class="m-1 text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">
                 I'm Feeling Lucky</button>
-            <button
+            <button id="history"
                 class="m-1 text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5">
-            Show History</button>
+                Show History</button>
         </div>
     </div>
 
@@ -40,6 +40,10 @@
                 setTimeout(() => {
                     e.target.innerHTML = 'Copy';
                 }, 1000);
+            })
+
+            $("#recreate").click((e) => {
+                
             })
         })
     </script>

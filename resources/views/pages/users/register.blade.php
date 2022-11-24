@@ -93,7 +93,7 @@
     </div>
 
     <script>
-        const BASE_URL = location.origin;
+        const BASE_URL = "{{ route('base_url') }}";
         $(document).ready(() => {
             const errModalRef = document.getElementById('error-modal');
             const errModal = new Modal(errModalRef, {});
@@ -120,7 +120,7 @@
                 }
 
                 $.ajax({
-                    url: "<?php url('registration'); ?>",
+                    url: "{{ route('registration') }}",
                     type: 'POST',
                     async: true,
                     data: {

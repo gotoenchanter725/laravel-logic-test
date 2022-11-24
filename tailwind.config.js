@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     require('flowbite/plugin'),
     // require('tailwindcss-plugins/pagination')({
-    //   /* Customizations here... */
+    //     /* Customizations here... */
     // }),
   ],
 }
