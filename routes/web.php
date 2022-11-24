@@ -23,7 +23,7 @@ Route::get("/register", [UserController::class, 'page']);
 Route::post("/register", [UserController::class, 'create'])->name('registration');
 Route::get('/check/{link}', [UserController::class, 'check']);
 
-Route::middleware(['auth.check'])->get("/main", [UserController::class, 'show'])->name('show');
+Route::middleware(['auth.check'])->get("/main", [UserController::class, 'main'])->name('main');
 
 // admin
 Route::middleware(['auth.check', 'admin'])->prefix('admin')->name('admin.')->group(function () {

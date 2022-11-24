@@ -69,12 +69,12 @@ class UserController extends Controller
         }
     }
     /**
-     * Show the User detail Page.
+     * Show the Main Page.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function main()
     {
-        return view('pages.users.show');
+        return view('pages.main');
     }
 }

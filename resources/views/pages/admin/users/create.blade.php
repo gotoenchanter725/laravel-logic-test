@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Users')
+@section('title', 'Admin User Create')
 
 @section('content')
     <div class="flex flex-col items-center justify-center min-h-screen bg-primary p-8">
