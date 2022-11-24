@@ -122,7 +122,7 @@ class UserController extends Controller
     public function deactivate(Request $request) {
         try {
             $user = $request->session()->get('user');
-            $user->link_active = false;
+            $user->link_active = !$user->link_active;
             $user->save();
     
             return response()->json([
