@@ -78,7 +78,9 @@ class UserController extends Controller
     public function main(Request $request)
     {
         return view('pages.main', [
-            'user' => $request->session()->get('user')
+            'user' => $request->session()->get('user', [
+                'user' => $request->session()->get("user")
+            ])
         ]);
     }
 
