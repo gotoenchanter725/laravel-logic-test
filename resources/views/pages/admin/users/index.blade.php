@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="flex flex-col items-center justify-center min-h-screen bg-primary p-8">
-        <div class="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg w-full flex flex-col">
+        <div class="max-w-[800px] px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg w-full flex flex-col">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold">All Users</h2>
                 <a class="px-6 py-2 mt-4 text-white bg-primary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300"
@@ -18,7 +18,7 @@
                 </div>
             @endif
 
-            <table class="border bordersolid border-primary rounded-lg">
+            <table class="border bordersolid border-primary rounded-lg mb-4">
                 <tr>
                     <th class="px-4 py-2.5 text-center border-r border-solid border-primary">No</th>
                     <th class="px-4 py-2.5 text-center border-r border-solid border-primary">Name</th>
@@ -50,6 +50,10 @@
                     </tr>
                 @endforeach
             </table>
+
+            <div class="">
+                {!! $users->links() !!}
+            </div>
         </div>
     </div>
 
