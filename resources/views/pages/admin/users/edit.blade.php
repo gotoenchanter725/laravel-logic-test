@@ -5,15 +5,10 @@
 @section('content')
     <div class="flex flex-col items-center justify-center min-h-screen bg-primary p-8">
         <div class="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg w-full flex flex-col">
-            <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <div class="pull-left">
-                        <h2>Edit User</h2>
-                    </div>
-                    <div class="pull-right">
-                        <a class="btn btn-primary" href="{{ route('admin.users.index') }}"> Back</a>
-                    </div>
-                </div>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Edit User</h2>
+                <a class="px-6 py-2 mt-4 text-white bg-primary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300"
+                    href="{{ route('admin.users.index') }}"> Back</a>
             </div>
 
             @if ($errors->any())
@@ -31,23 +26,27 @@
                 @csrf
                 @method('PUT')
 
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Name:</strong>
+                <div class="flex flex-col">
+                    <div class="flex items-center mb-2">
+                        <div class="min-w-[200px] font-semibold text-lg">
+                            Name:
+                        </div>
+                        <div>
                             <input type="text" name="name" value="{{ $user->name }}" class="form-control"
                                 placeholder="Name">
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Phone Number:</strong>
+                    <div class="flex items-center mb-2">
+                        <div class="min-w-[200px] font-semibold text-lg">
+                            Phone Number:
+                        </div>
+                        <div>
                             <input type="tel" class="form-control" name="phone" placeholder="Phone Number"
                                 value="{{ $user->phone }}" />
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="flex items-center mb-2 text-center">
+                        <button type="submit" class="px-6 py-2 mt-4 text-white bg-primary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300">Submit</button>
                     </div>
                 </div>
 
