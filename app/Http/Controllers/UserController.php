@@ -57,7 +57,7 @@ class UserController extends Controller
      * Check the access link and process
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return redirect
      */
     public function check(Request $request, $access_link) {
         $rst = User::where('link', '=', $access_link)->first();
@@ -68,13 +68,70 @@ class UserController extends Controller
             return redirect('/');
         }
     }
+
     /**
      * Show the Main Page.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function main()
+    public function main(Request $request)
     {
-        return view('pages.main');
+        return view('pages.main', [
+            'user' => $request->session()->get('user')
+        ]);
+    }
+
+    /**
+     * Recreate the access link
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function recreate(Request $request) {
+        try {
+            $user = $request->session()->get('user');
+            $access_link = Hash::make($user->phone . date('Y-m-d H:i:s'));
+            $access_link = str_replace("/", '_', $access_link);
+            $access_link = str_replace("?", '_', $access_link);
+            $user->link = $access_link;
+            $user->save();
+
+            $request->session()->put('user', $user);
+    
+            return response()->json([
+                'status' => 'success', 
+                'response' => $user
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error', 
+                'errMessage' => $th->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * Deactivate the User
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deactivate(Request $request) {
+        try {
+            $user = $request->session()->get('user');
+            $user->link_active = false;
+            $user->save();
+    
+            return response()->json([
+                'status' => 'success', 
+                'response' => $user
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error', 
+                'errMessage' => $th->getMessage()
+            ]);
+        }
     }
 }

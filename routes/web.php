@@ -23,9 +23,14 @@ Route::get("/register", [UserController::class, 'page']);
 Route::post("/register", [UserController::class, 'create'])->name('registration');
 Route::get('/check/{link}', [UserController::class, 'check']);
 
-Route::middleware(['auth.check'])->get("/main", [UserController::class, 'main'])->name('main');
+Route::middleware(['auth.check'])->group(function () {
+    Route::get("/main", [UserController::class, 'main'])->name('main');
+    Route::post('/recreate', [UserController::class, 'recreate'])->name('recreate');
+    Route::post('/deactivate', [UserController::class, 'deactivate'])->name('deactivate');
+});
 
 // admin
 Route::middleware(['auth.check', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource("/users", UserManageController::class);
+
 });

@@ -8,7 +8,7 @@
             <div
                 class="m-1 flex items-center max-w-[300px] border overflow-hidden text-gray-500 dark:text-gray-400 border-solid border-gray-200 rounded-lg">
                 <h3 id="accesslink" class="text-base px-2 mr-2 overflow-hidden">
-                    https://check/$2y$10$RWxwKcLbIzCkginiwV6hOOJpW1IQAPidYgCAvC59zUy1Jkc6oug96
+                    https://check/{{ $user->link }}
                 </h3>
                 <button id="copyBtn"
                     class="h-full text-white bg-primary hover:bg-secondary border-l border-gray-200 text-sm font-medium px-5 py-2">Copy</button>
@@ -43,7 +43,25 @@
             })
 
             $("#recreate").click((e) => {
-                
+                $.ajax({
+                    url: "{{ route('recreate') }}",
+                    type: 'POST',
+                    async: true,
+                    success: function(res) {
+                        console.log(res);
+                    }
+                })
+            })
+
+            $("#deactivate").click((e) => {
+                $.ajax({
+                    url: "{{ route('deactivate') }}",
+                    type: 'POST',
+                    async: true,
+                    success: function(res) {
+                        console.log(res);
+                    }
+                })
             })
         })
     </script>
