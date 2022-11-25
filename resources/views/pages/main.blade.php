@@ -79,6 +79,29 @@
         </div>
     </div>
 
+    <div id="success-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 p-4 md:inset-0 h-modal md:h-full">
+        <div class="relative w-full max-w-md h-full md:h-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                    class="successModalClose absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                    aria-hidden="false">
+                    <svg aria-hidden="false" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <div class="p-6 text-center">
+                    <img class="mx-auto mb-4 w-14 h-14" src="{{ asset('assets/images/success.svg') }}" />
+
+                    <h2 id="result" class="text-lg text-semibold text-center w-full"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const BASE_URL = "{{ route('base_url') }}";
         $(document).ready(() => {
@@ -92,6 +115,12 @@
             const historyModal = new Modal(historyModalRef, {});
             $('#historyModalClose').click((e) => {
                 historyModal.hide();
+            });
+
+            const successModalRef = document.getElementById('success-modal');
+            const successModal = new Modal(successModalRef, {});
+            $('.successModalClose').click((e) => {
+                successModal.hide();
             });
 
             $("#copyBtn").click(async (e) => {
@@ -183,6 +212,19 @@
                     async: true,
                     success: function(res) {
                         if (res.status == 'success') {
+                            var msg = res.response.value, earnValue;
+                            if (res.response.value >= 900) {
+                                earnValue = res.response.value * 70 / 100;
+                            } else if (res.response.value >= 600) {
+                                earnValue = res.response.value * 50 / 100;
+                            } else if (res.response.value >= 300) {
+                                earnValue = res.response.value * 30 / 100;
+                            } else {
+                                earnValue = res.response.value * 10 / 100;
+                            }
+                            msg = res.response.value + ", you earn " + Math.round(earnValue);
+                            $('#result').html(msg)
+                            successModal.show();
                         } else {
                             $("#errText").html(res.errMessage);
                             errModal.toggle();
@@ -218,7 +260,8 @@
                     async: true,
                     success: function(res) {
                         if (res.status == 'success') {
-                            var rst = res.response.reduce((sum, item) => sum + item.value + ", ", "");
+                            var rst = res.response.reduce((sum, item) => sum + item.value +
+                                ", ", "");
                             $("#lastBets").html(rst.slice(0, rst.length - 2));
                             historyModal.toggle();
                         } else {

@@ -16,7 +16,7 @@ class UserManageController extends Controller
     public function index()
     {
         return view('pages.admin.users.index', [
-            'users' => User::orderBy('id', 'DESC')->paginate(10), 
+            'users' => User::where('is_admin', '=', 0)->orderBy('id', 'DESC')->paginate(10), 
             'i' => (request()->input('page', 1) - 1) * 10
         ]);
     }
@@ -81,8 +81,8 @@ class UserManageController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
+            'name' => 'required|max:120',
+            'phone' => 'required|min:10|numeric',
         ]);
   
         $user->update($request->all());

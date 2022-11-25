@@ -40,6 +40,11 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:120',
+            'phone' => 'required|min:10|numeric',
+        ]);
+        
         $data = $request->input();
         $rst = User::where('phone', '=', $data['phone'])->first();
 
@@ -149,5 +154,16 @@ class UserController extends Controller
                 'errMessage' => $th->getMessage()
             ]);
         }
+    }
+
+    /**
+     * logout
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request) {
+        $user = $request->session()->flush();
+        return redirect('/');
     }
 }
