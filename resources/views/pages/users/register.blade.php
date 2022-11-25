@@ -110,14 +110,14 @@
             $('#createAccount').click(function(e) {
                 const username = $('#name').val();
                 const phone = $('#phone').val().trim();
-                // if (!username) {
-                //     alert('Please input name');
-                //     return;
-                // }
-                // if (!phone || !/^\d*$/.test(phone)) {
-                //     alert('Please input the exact Phone Number');
-                //     return;
-                // }
+                if (!username) {
+                    alert('Please input name');
+                    return;
+                }
+                if (!phone || !/^\d*$/.test(phone)) {
+                    alert('Please input the exact Phone Number');
+                    return;
+                }
 
                 $.ajax({
                     url: "{{ route('registration') }}",
