@@ -31,19 +31,19 @@ class UserController extends Controller
         $rst = User::where('phone', '=', $data['phone'])->first();
 
         if (!$rst) {
-            $newUser = new User;
-            $newUser->name = $data['name'];
-            $newUser->phone = $data['phone'];
+            $new_user = new User;
+            $new_user->name = $data['name'];
+            $new_user->phone = $data['phone'];
             $access_link = Hash::make($data['phone'] . date('Y-m-d H:i:s'));
             $access_link = str_replace("/", '_', $access_link);
             $access_link = str_replace("?", '_', $access_link);
-            $newUser->link = $access_link;
-            $newUser->expires_at = date('Y-m-d H:i:s', strtotime("5 days"));
-            $newUser->save();
+            $new_user->link = $access_link;
+            $new_user->expires_at = date('Y-m-d H:i:s', strtotime("5 days"));
+            $new_user->save();
 
             return response()->json([
                 'status' => 'success', 
-                'response' => $newUser
+                'response' => $new_user
             ]);
         } else {
             return response()->json([
