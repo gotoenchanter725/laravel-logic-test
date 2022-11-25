@@ -18,7 +18,7 @@ class BetController extends Controller
     public function bet(Request $request) {
         try {
             $new_bet = new Bet;
-            $new_bet->userId = $request->session()->id;
+            $new_bet->userId = $request->session()->get('user')->id;
             $new_bet->value = rand(1, 1000);
             $new_bet->save();
 
@@ -42,7 +42,7 @@ class BetController extends Controller
      */
     public function history(Request $request) {
         try {
-            $rst = Bet::where('userId', $request->session()->id)->orderBy('id', 'desc')->limit(3)->get();
+            $rst = Bet::where('userId', $request->session()->get('user')->id)->orderBy('id', 'desc')->limit(3)->get();
             return response()->json([
                 'status' => 'success', 
                 'response' => $rst

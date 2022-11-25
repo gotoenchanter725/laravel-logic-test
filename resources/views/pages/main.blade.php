@@ -72,13 +72,8 @@
                     </svg>
                 </button>
                 <div class="p-6 text-center">
-                    <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <h3 id="errText" class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    </h3>
+                    <h2 class="text-xl font-bold mb-4">Last Bet Results</h2>
+                    <p id="lastBets" class="font-semibold">100, 234, 900</p>
                 </div>
             </div>
         </div>
@@ -188,7 +183,6 @@
                     async: true,
                     success: function(res) {
                         if (res.status == 'success') {
-                            
                         } else {
                             $("#errText").html(res.errMessage);
                             errModal.toggle();
@@ -224,7 +218,9 @@
                     async: true,
                     success: function(res) {
                         if (res.status == 'success') {
-                            alert(res.response.value)
+                            var rst = res.response.reduce((sum, item) => sum + item.value + ", ", "");
+                            $("#lastBets").html(rst.slice(0, rst.length - 2));
+                            historyModal.toggle();
                         } else {
                             $("#errText").html(res.errMessage);
                             errModal.toggle();

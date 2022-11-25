@@ -14,7 +14,7 @@ class CreateBetsTable extends Migration
     public function up()
     {
         Schema::create('bets', function (Blueprint $table) {
-            $table->increments();
+            $table->increments('id');
             $table->integer('userId');
             $table->integer('value');
             $table->timestamps();
