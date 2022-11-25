@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="success-modal" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 p-4 md:inset-0 h-modal md:h-full">
         <div class="relative w-full max-w-md h-full md:h-auto">
@@ -212,7 +212,18 @@
                     async: true,
                     success: function(res) {
                         if (res.status == 'success') {
-                            $('#result').html(res.response.value)
+                            var msg = res.response.value, earnValue;
+                            if (res.response.value >= 900) {
+                                earnValue = res.response.value * 70 / 100;
+                            } else if (res.response.value >= 600) {
+                                earnValue = res.response.value * 50 / 100;
+                            } else if (res.response.value >= 300) {
+                                earnValue = res.response.value * 30 / 100;
+                            } else {
+                                earnValue = res.response.value * 10 / 100;
+                            }
+                            msg = res.response.value + ", you earn " + Math.round(earnValue);
+                            $('#result').html(msg)
                             successModal.show();
                         } else {
                             $("#errText").html(res.errMessage);
@@ -249,7 +260,8 @@
                     async: true,
                     success: function(res) {
                         if (res.status == 'success') {
-                            var rst = res.response.reduce((sum, item) => sum + item.value + ", ", "");
+                            var rst = res.response.reduce((sum, item) => sum + item.value +
+                                ", ", "");
                             $("#lastBets").html(rst.slice(0, rst.length - 2));
                             historyModal.toggle();
                         } else {
