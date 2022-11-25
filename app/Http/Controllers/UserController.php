@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    
+    /**
+     * Show the Home Page.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function home(Request $request)
+    {
+        return view('pages.home', [
+            'user' => $request->session()->get('user')
+        ]);
+    }
 
     /**
      * Show the User Register Page.
@@ -61,10 +74,11 @@ class UserController extends Controller
      */
     public function check(Request $request, $access_link) {
         $rst = User::where('link', '=', $access_link)->first();
-        if ($rst && strtotime($rst['expires_at']) > strtotime('now')) {
+        if ($rst && strtotime($rst['expires_at']) > strtotime('now') && $rst->link_active) {
             $request->session()->put('user', $rst);
             return redirect('/main');
         } else {
+            $request->session()->forget('user');
             return redirect('/');
         }
     }

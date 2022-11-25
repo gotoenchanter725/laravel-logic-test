@@ -16,9 +16,7 @@ use App\Http\Controllers\admin\UserManageController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('base_url');
+Route::get('/', [UserController::class, 'home'])->name('base_url');
 
 Route::get("/register", [UserController::class, 'page']);
 Route::post("/register", [UserController::class, 'create'])->name('registration');
