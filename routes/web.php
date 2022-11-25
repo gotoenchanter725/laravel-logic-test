@@ -16,24 +16,25 @@ use App\Http\Controllers\admin\UserManageController;
 |
 */
 
+// Public
 Route::get('/', [UserController::class, 'home'])->name('base_url');
-
 Route::get("/register", [UserController::class, 'page']);
 Route::post("/register", [UserController::class, 'create'])->name('registration');
 Route::get('/check/{link}', [UserController::class, 'check']);
 
+// Private
 Route::middleware(['auth.check'])->group(function () {
     Route::get("/main", [UserController::class, 'main'])->name('main');
     Route::post('/recreate', [UserController::class, 'recreate'])->name('recreate');
     Route::post('/deactivate', [UserController::class, 'deactivate'])->name('deactivate');
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-    // Bet
+    // Bet Section
     Route::post('/bet', [BetController::class, 'bet'])->name('bet');
     Route::post('/history_bet', [BetController::class, 'history'])->name('history_bet');
-});
 
-// admin
-Route::middleware(['auth.check', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource("/users", UserManageController::class);
+    // Admin Section
+    Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
+        Route::resource("/users", UserManageController::class);
+    });
 });
