@@ -26,6 +26,7 @@ Route::middleware(['auth.check'])->group(function () {
     Route::get("/main", [UserController::class, 'main'])->name('main');
     Route::post('/recreate', [UserController::class, 'recreate'])->name('recreate');
     Route::post('/deactivate', [UserController::class, 'deactivate'])->name('deactivate');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
     // Bet
     Route::post('/bet', [BetController::class, 'bet'])->name('bet');

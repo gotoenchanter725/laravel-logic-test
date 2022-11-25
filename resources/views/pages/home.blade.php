@@ -7,7 +7,7 @@
         <div class="relative pt-6 pb-16 sm:pb-20">
             <header>
                 <nav class="container relative flex items-center justify-between px-4 mx-auto sm:px-6" aria-label="Global">
-                    <div class="flex items-center flex-1">
+                    <div class="flex justify-between items-center flex-1">
                         <div class="space-x-10 lg:flex lg:ml-10">
                             <a href="/register"
                                 class="capitalize transition-colors duration-300 text-white hover:text-blue-400">Register</a>
@@ -15,11 +15,16 @@
                                 <a href="/main"
                                     class="capitalize transition-colors duration-300 text-white hover:text-blue-400">Main</a>
                             @endif
-                                
+
                             @if ($user && $user->is_admin)
                                 <a href="/admin/users"
                                     class="capitalize transition-colors duration-300 text-white hover:text-blue-400">Admin</a>
                             @endif
+                        </div>
+
+                        <div class="">
+                            <a href="/logout"
+                                class="capitalize transition-colors duration-300 text-white hover:text-blue-400">Logout</a>
                         </div>
                     </div>
                 </nav>
@@ -53,7 +58,8 @@
                                     <span class="text-blue-400 md:block"> with Tailwind CSS</span>
                                 </h1>
                                 <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl xl:text-lg">
-                                    Tailwind provides almost all the tools you need to build out a site, so you rarely need to write any custom CSS.
+                                    Tailwind provides almost all the tools you need to build out a site, so you rarely need
+                                    to write any custom CSS.
                                 </p>
                                 <div
                                     class="grid grid-cols-1 gap-3 mt-8 text-center lg:justify-start sm:justify-center sm:flex sm:gap-0 sm:space-x-4">

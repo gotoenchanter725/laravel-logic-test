@@ -150,4 +150,15 @@ class UserController extends Controller
             ]);
         }
     }
+
+    /**
+     * logout
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request) {
+        $user = $request->session()->flush();
+        return redirect('/');
+    }
 }
