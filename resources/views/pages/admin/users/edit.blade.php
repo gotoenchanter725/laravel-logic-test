@@ -11,6 +11,21 @@
                     href="{{ route('admin.users.index') }}"> Back</a>
             </div>
 
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <span class="font-bold">Whoops!</span> There were some problems with your input.
+                    <ul class="my-4">
+                        @foreach ($errors->all() as $error)
+                            <div class="p-4 mb-2 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                                role="alert">
+                                <span class="font-medium mr-2">Error!</span>{{ $error }}
+                            </div>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -35,7 +50,8 @@
                         </div>
                     </div>
                     <div class="flex items-center mb-2 text-center">
-                        <button type="submit" class="px-6 py-2 mt-4 text-white bg-primary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300">Submit</button>
+                        <button type="submit"
+                            class="px-6 py-2 mt-4 text-white bg-primary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300">Submit</button>
                     </div>
                 </div>
 

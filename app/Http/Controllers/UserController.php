@@ -40,6 +40,11 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:120',
+            'phone' => 'required|min:10|numeric',
+        ]);
+        
         $data = $request->input();
         $rst = User::where('phone', '=', $data['phone'])->first();
 

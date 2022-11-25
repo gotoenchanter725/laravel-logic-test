@@ -23,8 +23,10 @@
                         </div>
 
                         <div class="">
-                            <a href="/logout"
-                                class="capitalize transition-colors duration-300 text-white hover:text-blue-400">Logout</a>
+                            @if ($user)
+                                <a href="/logout"
+                                    class="capitalize transition-colors duration-300 text-white hover:text-blue-400">Logout</a>      
+                            @endif
                         </div>
                     </div>
                 </nav>

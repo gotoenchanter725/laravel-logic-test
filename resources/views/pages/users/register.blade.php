@@ -109,15 +109,15 @@
 
             $('#createAccount').click(function(e) {
                 const username = $('#name').val();
-                const phone = $('#phone').val();
-                if (!username) {
-                    alert('Input Name');
-                    return;
-                }
-                if (!phone) {
-                    alert('Input Phone Number');
-                    return;
-                }
+                const phone = $('#phone').val().trim();
+                // if (!username) {
+                //     alert('Please input name');
+                //     return;
+                // }
+                // if (!phone || !/^\d*$/.test(phone)) {
+                //     alert('Please input the exact Phone Number');
+                //     return;
+                // }
 
                 $.ajax({
                     url: "{{ route('registration') }}",
@@ -152,7 +152,14 @@
                         } else if (exception === "abort") {
                             msg = "Ajax request aborted.";
                         } else {
-                            msg = "Error:" + xhr.status;
+                            if (xhr.status == 422) {
+                                if (xhr.responseJSON.errors) {
+                                    Object.values(xhr.responseJSON.errors).forEach((item) => {
+                                        msg += (item + "<br />");
+                                    })
+                                } else msg = "Error:" + xhr.status;
+                            }
+                            else msg = "Error:" + xhr.status;
                         }
                         $("#errText").html(msg);
                         errModal.toggle();
