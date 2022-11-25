@@ -105,18 +105,22 @@
     <script>
         const BASE_URL = "{{ route('base_url') }}";
         $(document).ready(() => {
+            // Creating error modal 
             const errModalRef = document.getElementById('error-modal');
             const errModal = new Modal(errModalRef, {});
             $('#errorModalClose').click((e) => {
                 errModal.hide();
             });
-
+            
+            // Creating history modal 
             const historyModalRef = document.getElementById('history-modal');
             const historyModal = new Modal(historyModalRef, {});
+            // Creating history modal 
             $('#historyModalClose').click((e) => {
                 historyModal.hide();
             });
-
+            
+            // Creating success modal 
             const successModalRef = document.getElementById('success-modal');
             const successModal = new Modal(successModalRef, {});
             $('.successModalClose').click((e) => {

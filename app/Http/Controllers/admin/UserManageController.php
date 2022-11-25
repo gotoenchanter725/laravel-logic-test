@@ -9,7 +9,7 @@ use App\Models\User;
 class UserManageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users.
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,7 +22,7 @@ class UserManageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +32,7 @@ class UserManageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -50,7 +50,7 @@ class UserManageController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user information.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -61,7 +61,7 @@ class UserManageController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified user information.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
@@ -72,7 +72,7 @@ class UserManageController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified user information.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Modal\User  $user
@@ -92,7 +92,7 @@ class UserManageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
